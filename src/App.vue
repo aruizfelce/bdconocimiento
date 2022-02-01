@@ -18,6 +18,9 @@ export default {
     Navbar
     
   },
+  created(){
+    this.$store.dispatch("checkAuth");
+  },
 
   data: () => ({
     //

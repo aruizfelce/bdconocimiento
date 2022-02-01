@@ -1,5 +1,8 @@
 <template>
   <v-container fluid class="grey lighten-3 py-10">
+    <v-snackbar v-model="snackbar" :timeout="2000" top>
+        {{ mensaje }}
+    </v-snackbar>
     <v-row class="my-10" justify="center" align="center">
       <v-col>
         <v-card class="mx-auto" max-width="400">
@@ -135,13 +138,11 @@ export default {
             error: "",
             errorMsg: "",
             loading: false,
-            loading2: false,
             snackbar: false,
             error2: false,
             mensajeSinMail: "",
             mensaje: "",
             isLogin:true
-
         }
     },
     methods: {
@@ -158,6 +159,8 @@ export default {
             email: this.userData.email,
             password: this.userData.password
           })
+          this.snackbar= true;
+          this.mensaje = "Se ingresó con éxito"
           this.resetData();
           this.redirect();
         } catch (error) {

@@ -1,5 +1,8 @@
 <template>
 <div>
+    <v-snackbar v-model="snackbar" :timeout="2000" top>
+        {{ mensaje }}
+    </v-snackbar>
     <v-app-bar
       color="deep-purple"
       dark
@@ -66,6 +69,8 @@
     data: () => ({
       drawer: false,
       group: null,
+      snackbar : false,
+      mensaje: ''
     }),
 
     computed:{
@@ -77,6 +82,8 @@
         try{
           await this.$store.dispatch("users/doLogout");
           this.$router.push({name:'auth'});
+          this.snackbar = true;
+          this.mensaje = "Se cerró la sesión"
         }catch(error){
           console.log(error);
         }
