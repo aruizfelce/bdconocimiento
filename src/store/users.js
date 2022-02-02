@@ -11,6 +11,39 @@ export default{
         }
     },
     actions:{
+        getCurrentUser() {
+            return new Promise((resolve, reject) => {
+              const unsubscribe = auth.onAuthStateChanged(
+                user => {
+                  unsubscribe();
+                  resolve(user);
+                },
+                () => {
+                  reject();
+                }
+              );
+            });
+          },
+          async updateProfile({ commit }, { name, email, password }) {
+            const user = auth.currentUser;
+        
+            if (name) {
+              await user.updateProfile({
+                displayName: name
+              });
+        
+            if (email) {
+              await user.updateEmail(email);
+            }
+        
+            if (password) {
+              await user.updatePassword(password);
+            }
+        
+            commit("setUser", user);
+          }
+        },
+          
         async doLogin({commit},{email,password}){
             await auth.signInWithEmailAndPassword(email,password);
             commit("setUser",auth.currentUser);

@@ -30,7 +30,7 @@
           v-model="group"
           active-class="deep-purple--text text--accent-4"
         >
-          <v-list-item>
+          <v-list-item link router to="home">
             <v-list-item-icon>
               <v-icon>mdi-home</v-icon>
             </v-list-item-icon>
@@ -49,11 +49,15 @@
             </v-list-item-icon>
             <v-list-item-title>Tips</v-list-item-title>
           </v-list-item>
-          <v-list-item>
+          <v-list-item link router to="profile">
             <v-list-item-icon>
               <v-icon>mdi-account</v-icon>
             </v-list-item-icon>
-            <v-list-item-title>Account</v-list-item-title>
+            <v-list-item-title>
+              
+                Account
+              
+             </v-list-item-title>
           </v-list-item>
         </v-list-item-group>
       </v-list>

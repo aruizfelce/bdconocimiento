@@ -1,8 +1,6 @@
 <template>
   <v-container fluid class="grey lighten-3 py-10">
-    <v-snackbar v-model="snackbar" :timeout="2000" top>
-        {{ mensaje }}
-    </v-snackbar>
+
     <v-row class="my-10" justify="center" align="center">
       <v-col>
         <v-card class="mx-auto" max-width="400">
@@ -110,15 +108,11 @@
                 </v-list>
               </v-row>
           </v-card-text>
-          <div v-if="error">
-            <p class="mx-4 pl-2 blue--text">{{ errorMsg }}</p>
-          </div>
+
           <div v-if="mensaje">
             <p class="mx-4 pl-2 blue--text">{{ mensaje }}</p>
           </div>
-          <div v-if="mensajeSinMail">
-            <p class="mx-4 pl-2 blue--text">{{ mensajeSinMail }}</p>
-          </div>
+
         </v-card>
       </v-col>
     </v-row>
@@ -135,12 +129,9 @@ export default {
               email:"",
               password: "",
             },
-            error: "",
-            errorMsg: "",
+            
             loading: false,
             snackbar: false,
-            error2: false,
-            mensajeSinMail: "",
             mensaje: "",
             isLogin:true
         }
@@ -164,7 +155,7 @@ export default {
           this.resetData();
           this.redirect();
         } catch (error) {
-          console.log(error);
+          this.mensaje=error;
         }finally{
           this.loading = false;
         }
