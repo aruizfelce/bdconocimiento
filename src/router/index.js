@@ -26,6 +26,14 @@ const routes = [
     meta:{
       requiresAuth: true
     }
+  },
+  {
+    path: '/add',
+    name: 'add',
+    component: () => import('../views/AddView.vue'),
+    meta:{
+      requiresAuth: true
+    }
   }
 ]
 

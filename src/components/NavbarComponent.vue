@@ -1,9 +1,10 @@
 <template>
 <div>
-    <v-snackbar v-model="snackbar" :timeout="2000" top>
+    <v-snackbar  v-model="snackbar" :timeout="2000" top>
         {{ mensaje }}
     </v-snackbar>
     <v-app-bar
+      app
       color="deep-purple"
       dark
     >
@@ -43,7 +44,7 @@
             </v-list-item-icon>
             <v-list-item-title>Categorias</v-list-item-title>
           </v-list-item>
-          <v-list-item>
+          <v-list-item link router to="add">
             <v-list-item-icon>
               <v-icon>mdi-book-open-blank-variant</v-icon>
             </v-list-item-icon>

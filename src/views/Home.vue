@@ -1,52 +1,52 @@
 <template>
   <div class="my-4 text-center">
-      <v-spacer></v-spacer>
-      <v-btn v-if="!usuario" @click="doLogin" depressed color="primary">
-         Login con Google
-      </v-btn>
-      <template v-else>
-        <h1>Hola: {{ usuario.displayName }}</h1>
-        <v-btn @click="doLogout" depressed color="primary">
-         Log Out
-      </v-btn>  
-      </template>
-      
-  </div>  
-    
-</template>
+    <template>
+      <v-simple-table>
+        <template v-slot:default>
+          <thead>
+            <tr>
+              <th class="text-center">Categoria</th>
+              <th class="text-center">Titulo</th>
+              <th class="text-center">Contenido</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(post, index) in dataPost" :key="index">
+              <td>{{ post.categoria }}</td>
+              <td>{{ post.titulo }}</td>
+              <td>{{ post.contenido }}</td>
+            </tr>
+          </tbody>
+        </template>
+      </v-simple-table>
+    </template>
+  </div>
+ </template>
 
 <script>
-  import {fb,auth} from '../firebase'
-  export default {
-    name: 'Home',
+import { db } from "../firebase";
 
-    components: {
-  
-    },
-    data() {
-      return {
-        usuario:null
+export default {
+  name: "Home",
+
+  components: {},
+  data() {
+    return {
+      dataPost: [],
+    };
+  },
+  methods: {
+    async loadData() {
+      try {
+        const collection = await db.collection("posts").get();
+        collection.forEach((doc) => this.dataPost.push(doc.data()));
+      } catch (error) {
+        console.log(error);
       }
     },
-    methods: {
-      async doLogin(){
-        try {
-          const provider = new fb.auth.GoogleAuthProvider();
-          const user = await auth.signInWithPopup(provider);
-          this.usuario = user.user;
-        } catch (error) {
-          console.log(error);
-        }
-      },
-      async doLogout(){
-        try {
-          await auth.signOut();
-          this.usuario = null;
-        } catch (error) {
-          console.log(error);
-        }
-        
-      }
-    },
-  }
+  },
+  created() {
+    this.loadData();
+  },
+};
 </script>
