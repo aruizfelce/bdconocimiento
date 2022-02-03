@@ -1,26 +1,24 @@
 <template>
-  <div class="my-4 text-center">
-    <template>
-      <v-simple-table>
-        <template v-slot:default>
-          <thead>
-            <tr>
-              <th class="text-center">Categoria</th>
-              <th class="text-center">Titulo</th>
-              <th class="text-center">Contenido</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="(post, index) in dataPost" :key="index">
-              <td>{{ post.categoria }}</td>
-              <td>{{ post.titulo }}</td>
-              <td>{{ post.contenido }}</td>
-            </tr>
-          </tbody>
-        </template>
-      </v-simple-table>
-    </template>
-  </div>
+   
+    <v-card class="mx-auto" max-width="80%">
+    
+    <v-card-title>
+      <v-text-field
+        v-model="search"
+        append-icon="mdi-magnify"
+        label="Search"
+        single-line
+        hide-details
+      ></v-text-field>
+    </v-card-title>
+    <v-data-table
+      :headers="headers"
+      :items="dataPost"
+      :search="search"
+      group-by="categoria"
+    ></v-data-table>
+  </v-card>
+  
  </template>
 
 <script>
@@ -33,6 +31,19 @@ export default {
   data() {
     return {
       dataPost: [],
+      search: '',
+        headers: [
+          {
+            
+            align: 'start',
+            filterable: false,
+            value: 'name',
+          },
+          { text: 'Categoria', value: 'categoria' },
+          { text: 'Titulo', value: 'titulo' },
+          { text: 'Contenido)', value: 'contenido' },
+          
+        ],
     };
   },
   methods: {
