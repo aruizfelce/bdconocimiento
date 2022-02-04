@@ -80,7 +80,7 @@
             </v-card-actions>
           </v-card>
         </v-dialog>
-      <v-dialog v-model="dialogDelete" max-width="500px">
+      <v-dialog v-model="dialogDelete" max-width="80%">
         <v-card>
           <v-card-title class="headline">
             ¿Está seguro de borrar este registro?

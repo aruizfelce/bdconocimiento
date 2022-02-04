@@ -17,11 +17,11 @@
                 label="Titulo"
                 prepend-icon="mdi-format-title"
               ></v-text-field>
-              <v-textarea
+              <ckeditor
                 v-model="dataPost.contenido"
                 label="Contenido"
                 prepend-icon="mdi-book-open-blank-variant"
-              ></v-textarea>
+              ></ckeditor>
               <v-card-actions class="align-center">
                 <v-row justify="center" align="center">
                   <v-col cols="12">
