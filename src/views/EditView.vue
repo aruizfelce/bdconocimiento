@@ -5,7 +5,7 @@
         <v-card class="mx-auto" max-width="80%" >
           <v-card-text>
             <v-form>
-              <h2 class="text-center">Agregar Tip</h2>
+              <h2 class="text-center">Editar Tip</h2>
               <v-select
                 :items="categories"
                 label="Categoria"
@@ -54,26 +54,41 @@ data() {
         dataPost:{
             categoria:'',
             titulo: '',
-            contenido:''
+            contenido:'',
+            id:''
         },
         loading:false,
         categories:[]
     }
 },
 mounted() {
-  this.loadCategories();
+    this.dataPost.id = this.$route.params.id;
+    this.loadItem();
+    this.loadCategories();
 },
 methods: {
+   async loadItem() {
+     try {
+        const collection = await db
+          .collection("posts")
+          .where("id", "==", this.dataPost.id)
+          .get();
+        collection.forEach((doc) => this.dataPost=(doc.data()));
+      } catch (error) {
+        console.log(error);
+      }
+    },
     async save(dataPost){
         this.loading = true;
-        const docRef = db.collection("posts").doc();
-        await docRef.set({ categoria: dataPost.categoria, titulo: dataPost.titulo, contenido: dataPost.contenido, created: Date.now(), id: docRef.id });
+        await db.collection("posts").doc(this.dataPost.id).update(
+          {
+            categoria : this.dataPost.categoria,
+            titulo : this.dataPost.titulo,
+            contenido : this.dataPost.contenido
+          }
+        );
         this.loading = false;
-        this.dataPost={
-            categoria:'',
-            titulo: '',
-            contenido:''
-        }
+        this.$router.push('/');
     },
     async loadCategories() {
      try {
@@ -82,8 +97,9 @@ methods: {
       } catch (error) {
         console.log(error);
       }
-    }
-},
+    },
+
+}
 }
 </script>
 

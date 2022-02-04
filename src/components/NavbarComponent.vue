@@ -31,19 +31,20 @@
           v-model="group"
           active-class="deep-purple--text text--accent-4"
         >
-          <v-list-item link router to="home">
+          <v-list-item link router to="/">
             <v-list-item-icon>
               <v-icon>mdi-home</v-icon>
             </v-list-item-icon>
             <v-list-item-title>Home</v-list-item-title>
           </v-list-item>
 
-          <v-list-item>
+          <v-list-item link router to="categories">
             <v-list-item-icon>
               <v-icon>mdi-shape-outline</v-icon>
             </v-list-item-icon>
             <v-list-item-title>Categorias</v-list-item-title>
           </v-list-item>
+          
           <v-list-item link router to="add">
             <v-list-item-icon>
               <v-icon>mdi-book-open-blank-variant</v-icon>
